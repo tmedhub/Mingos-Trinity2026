@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>TRINITY 2026</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet">
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -16,68 +16,58 @@
 }
 
 body {
-  background: #ffffff;
-  font-family: 'Inter Tight', system-ui, sans-serif;
   height: 100vh;
+  background: #fff;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   overflow: hidden;
 }
 
+/* ---------- SCREENS ---------- */
 .screen {
   position: absolute;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.8s ease;
+  transition: opacity 1s ease;
+  opacity: 0;
 }
 
-/* ---------- TRINITY SECTION ---------- */
+.show {
+  opacity: 1;
+}
+
+/* ---------- INTRO ---------- */
 #intro {
   flex-direction: column;
-  gap: 2rem;
 }
 
-.trinity-blanks {
+.word {
   display: flex;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
-.char {
+.slot {
+  width: 2.2rem;
   text-align: center;
-}
-
-.char span {
   font-size: clamp(3rem, 10vw, 5rem);
   font-weight: 700;
   letter-spacing: -0.04em;
-  opacity: 0;
+  color: #000;
+  transition: opacity 0.4s ease;
 }
 
 .blank {
-  margin-top: 0.3rem;
-  width: 2rem;
-  height: 2px;
-  background: #000;
+  opacity: 1;
 }
 
-#register {
-  font-size: 0.9rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-/* ---------- BACKGROUND ---------- */
-#bg {
-  background: url('bg.jpeg') center/cover no-repeat;
+.letter {
   opacity: 0;
 }
 
 /* ---------- POSTER ---------- */
 #poster {
   background: #000;
-  opacity: 0;
 }
 
 #poster img {
@@ -85,15 +75,10 @@ body {
   height: 100%;
   object-fit: contain;
   transform: scale(1.02);
-  transition: transform 1s ease;
+  transition: transform 1.2s ease;
 }
 
-/* ---------- ACTIVE STATES ---------- */
-.show {
-  opacity: 1;
-}
-
-.scale-in img {
+#poster.show img {
   transform: scale(1);
 }
 </style>
@@ -101,59 +86,46 @@ body {
 
 <body>
 
-<!-- INTRO -->
+<!-- INTRO SCREEN -->
 <div id="intro" class="screen show">
-  <div class="trinity-blanks">
-    <div class="char"><span>T</span><div class="blank"></div></div>
-    <div class="char"><span>R</span><div class="blank"></div></div>
-    <div class="char"><span>I</span><div class="blank"></div></div>
-    <div class="char"><span>N</span><div class="blank"></div></div>
-    <div class="char"><span>I</span><div class="blank"></div></div>
-    <div class="char"><span>T</span><div class="blank"></div></div>
-    <div class="char"><span>Y</span><div class="blank"></div></div>
+  <div class="word">
+    <div class="slot" data-letter="T">_</div>
+    <div class="slot" data-letter="R">_</div>
+    <div class="slot" data-letter="I">_</div>
+    <div class="slot" data-letter="N">_</div>
+    <div class="slot" data-letter="I">_</div>
+    <div class="slot" data-letter="T">_</div>
+    <div class="slot" data-letter="Y">_</div>
   </div>
-
-  <div id="register">Register Now</div>
 </div>
 
-<!-- BACKGROUND -->
-<div id="bg" class="screen"></div>
-
-<!-- POSTER -->
+<!-- POSTER SCREEN -->
 <div id="poster" class="screen">
   <img src="trinity2026.jpeg" alt="Trinity 2026 Poster">
 </div>
 
 <script>
-const letters = document.querySelectorAll('.char span');
-const register = document.getElementById('register');
+const slots = document.querySelectorAll('.slot');
 const intro = document.getElementById('intro');
-const bg = document.getElementById('bg');
 const poster = document.getElementById('poster');
 
-// Typing reveal
-letters.forEach((letter, i) => {
+slots.forEach((slot, index) => {
   setTimeout(() => {
-    letter.style.opacity = 1;
-  }, i * 45);
+    slot.style.opacity = 0;
+    setTimeout(() => {
+      slot.textContent = slot.dataset.letter;
+      slot.style.opacity = 1;
+    }, 300);
+  }, index * 800);
 });
 
-// Show Register Now
-setTimeout(() => {
-  register.style.opacity = 1;
-}, letters.length * 45 + 150);
+// After last letter + 2s pause → fade poster
+const totalTime = slots.length * 800 + 2000;
 
-// Hold 2 seconds, then transition
 setTimeout(() => {
   intro.classList.remove('show');
-  bg.classList.add('show');
-
-  setTimeout(() => {
-    poster.classList.add('show');
-    poster.classList.add('scale-in');
-  }, 600);
-
-}, letters.length * 45 + 2150);
+  poster.classList.add('show');
+}, totalTime);
 </script>
 
 </body>
