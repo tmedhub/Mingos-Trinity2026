@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TRINITY 2026</title>
 
+<!-- Google Font Anton -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
 <style>
 * {
   margin: 0;
@@ -54,19 +57,19 @@ html, body {
   align-items: center;
 }
 
-/* Letters: Black with subtle white glow for visibility */
+/* Letters: Bold, black, visible */
 .slot {
-  width: 2.2rem;
-  font-size: clamp(2rem, 5vw, 2.8rem);
-  font-weight: 900;
-  font-family: "Copperplate", "Copperplate Gothic Bold", fantasy, sans-serif;
+  width: auto;
+  font-size: clamp(3rem, 8vw, 6rem); /* responsive large letters */
+  font-weight: 400; /* Anton is already bold */
+  font-family: 'Anton', sans-serif;
   color: #000; /* black letters */
-  text-shadow: 0 0 4px rgba(255,255,255,0.6); /* subtle glow for visibility */
+  text-shadow: 0 0 4px rgba(255,255,255,0.6); /* subtle glow for contrast */
 }
 
 /* ---------- REGISTER ---------- */
 #register {
-  font-size: clamp(1rem, 3vw, 1.3rem);
+  font-size: clamp(1rem, 3vw, 1.5rem);
   font-weight: 800;
   letter-spacing: 0.22em;
   text-transform: uppercase;
