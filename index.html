@@ -55,10 +55,12 @@ html, body {
   align-items: center;
 }
 
+/* Copperplate Gothic Black Bold for TRINITY letters */
 .slot {
   width: 2.2rem;
   font-size: clamp(2rem, 5vw, 2.8rem);
-  font-weight: 800; /* EXTRA BOLD */
+  font-weight: 900;
+  font-family: "Copperplate", "Copperplate Gothic Bold", fantasy;
   color: #000;
 }
 
@@ -115,4 +117,26 @@ const intro = document.getElementById('intro');
 const poster = document.getElementById('poster');
 
 const LETTER_SPEED = 1000; // 1s per letter
-const POSTER_WAIT = 2000;_
+const POSTER_WAIT = 2000;  // wait after Register Now
+
+// Letter reveal
+slots.forEach((slot, i) => {
+  setTimeout(() => {
+    slot.textContent = slot.dataset.letter;
+  }, i * LETTER_SPEED);
+});
+
+// Show Register Now!!
+setTimeout(() => {
+  register.style.opacity = 1;
+}, slots.length * LETTER_SPEED + 200);
+
+// Poster after pause
+setTimeout(() => {
+  intro.classList.remove('show');
+  poster.classList.add('show');
+}, slots.length * LETTER_SPEED + 200 + POSTER_WAIT);
+</script>
+
+</body>
+</html>
