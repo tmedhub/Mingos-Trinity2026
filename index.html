@@ -19,7 +19,6 @@ html, body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
 }
 
-/* ---------- SCREENS ---------- */
 .screen {
   position: absolute;
   inset: 0;
@@ -35,12 +34,8 @@ html, body {
   opacity: 1;
 }
 
-/* ---------- INTRO ---------- */
 #intro {
-  background-image: url('bg.jpeg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  background: url('bg.jpeg') center / contain no-repeat;
 }
 
 .center-content {
@@ -50,7 +45,6 @@ html, body {
   gap: 1.4rem;
 }
 
-/* ---------- WORD ---------- */
 .word {
   display: flex;
   gap: 1rem;
@@ -70,7 +64,6 @@ html, body {
   opacity: 0;
 }
 
-/* ---------- REGISTER ---------- */
 #register {
   font-size: clamp(0.8rem, 2.3vw, 1rem);
   font-weight: 700;
@@ -79,7 +72,6 @@ html, body {
   opacity: 0;
 }
 
-/* ---------- POSTER ---------- */
 #poster {
   background: #000;
 }
@@ -94,7 +86,6 @@ html, body {
 
 <body>
 
-<!-- INTRO -->
 <div id="intro" class="screen show">
   <div class="center-content">
     <div class="word">
@@ -105,52 +96,57 @@ html, body {
       <div class="slot" data-letter="I">_</div>
       <div class="slot" data-letter="T">_</div>
       <div class="slot" data-letter="Y">_</div>
-      <div class="exclaim">!</div>
-      <div class="exclaim">!</div>
+      <div class="exclaim" id="ex1">!</div>
+      <div class="exclaim" id="ex2">!</div>
     </div>
 
     <div id="register">Register Now</div>
   </div>
 </div>
 
-<!-- POSTER -->
 <div id="poster" class="screen">
   <img src="Trinity2026.jpg" alt="Trinity 2026 Poster">
 </div>
 
 <script>
 const slots = document.querySelectorAll('.slot');
-const exclaims = document.querySelectorAll('.exclaim');
+const ex1 = document.getElementById('ex1');
+const ex2 = document.getElementById('ex2');
 const register = document.getElementById('register');
 const intro = document.getElementById('intro');
 const poster = document.getElementById('poster');
 
-/* ---------- TIMING ---------- */
-const LETTER_SPEED = 1000; // 1 second per letter
-const PAUSE_AFTER_REGISTER = 2000; // 2 seconds pause
+const LETTER_SPEED = 1000; // 1s per letter
+const EXCLAMATION_DELAY = 500;
+const POSTER_DELAY = 2000;
 
-// Letter reveal
+// Letters
 slots.forEach((slot, i) => {
   setTimeout(() => {
     slot.textContent = slot.dataset.letter;
   }, i * LETTER_SPEED);
 });
 
-// Show !!
+// First !
 setTimeout(() => {
-  exclaims.forEach(e => e.style.opacity = 1);
+  ex1.style.opacity = 1;
 }, slots.length * LETTER_SPEED);
 
-// Show Register Now
+// Second !
+setTimeout(() => {
+  ex2.style.opacity = 1;
+}, slots.length * LETTER_SPEED + EXCLAMATION_DELAY);
+
+// Register Now
 setTimeout(() => {
   register.style.opacity = 1;
-}, slots.length * LETTER_SPEED + 300);
+}, slots.length * LETTER_SPEED + EXCLAMATION_DELAY + 200);
 
-// Pause, then show poster
+// Poster after 2s pause
 setTimeout(() => {
   intro.classList.remove('show');
   poster.classList.add('show');
-}, slots.length * LETTER_SPEED + 300 + PAUSE_AFTER_REGISTER);
+}, slots.length * LETTER_SPEED + EXCLAMATION_DELAY + 200 + POSTER_DELAY);
 </script>
 
 </body>
