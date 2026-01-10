@@ -38,39 +38,37 @@ html, body {
 /* ---------- INTRO ---------- */
 #intro {
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
   background: url('bg.jpeg') center / contain no-repeat;
-  padding: 5vh 5vw; /* keeps text inside image safe zone */
+  padding: 6vh 6vw;
 }
 
 /* ---------- WORD ---------- */
 .word {
   display: flex;
-  gap: 1.2rem;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
-  max-width: 100%;
 }
 
-/* Smaller, image-friendly sizing */
+/* Slower / smaller typography */
 .slot,
 .exclaim {
-  width: 2.2rem;
-  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  width: 2rem;
+  font-size: clamp(1.9rem, 5vw, 2.7rem);
   font-weight: 700;
   color: #000;
 }
 
-/* Exclamations have no blanks */
 .exclaim {
   opacity: 0;
 }
 
 /* ---------- REGISTER ---------- */
 #register {
-  font-size: clamp(0.9rem, 2.8vw, 1.2rem);
+  font-size: clamp(0.8rem, 2.4vw, 1.05rem);
   font-weight: 700;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   opacity: 0;
 }
@@ -119,7 +117,7 @@ const register = document.getElementById('register');
 const intro = document.getElementById('intro');
 const poster = document.getElementById('poster');
 
-const LETTER_SPEED = 140; // fast, clean
+const LETTER_SPEED = 140;
 
 slots.forEach((slot, i) => {
   setTimeout(() => {
