@@ -37,10 +37,18 @@ html, body {
 
 /* ---------- INTRO ---------- */
 #intro {
+  background-image: url('bg.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* FITS ANY SCREEN */
+}
+
+/* Content centered independently of image */
+.center-content {
+  display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  background: url('bg.jpeg') center / contain no-repeat;
-  padding: 6vh 6vw;
+  align-items: center;
+  gap: 1.4rem;
 }
 
 /* ---------- WORD ---------- */
@@ -51,11 +59,11 @@ html, body {
   align-items: center;
 }
 
-/* Slower / smaller typography */
+/* Smaller, calm typography */
 .slot,
 .exclaim {
   width: 2rem;
-  font-size: clamp(1.9rem, 5vw, 2.7rem);
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
   font-weight: 700;
   color: #000;
 }
@@ -66,7 +74,7 @@ html, body {
 
 /* ---------- REGISTER ---------- */
 #register {
-  font-size: clamp(0.8rem, 2.4vw, 1.05rem);
+  font-size: clamp(0.8rem, 2.3vw, 1rem);
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -81,7 +89,7 @@ html, body {
 #poster img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: contain; /* FULLY VISIBLE */
 }
 </style>
 </head>
@@ -90,19 +98,21 @@ html, body {
 
 <!-- INTRO -->
 <div id="intro" class="screen show">
-  <div class="word">
-    <div class="slot" data-letter="T">_</div>
-    <div class="slot" data-letter="R">_</div>
-    <div class="slot" data-letter="I">_</div>
-    <div class="slot" data-letter="N">_</div>
-    <div class="slot" data-letter="I">_</div>
-    <div class="slot" data-letter="T">_</div>
-    <div class="slot" data-letter="Y">_</div>
-    <div class="exclaim">!</div>
-    <div class="exclaim">!</div>
-  </div>
+  <div class="center-content">
+    <div class="word">
+      <div class="slot" data-letter="T">_</div>
+      <div class="slot" data-letter="R">_</div>
+      <div class="slot" data-letter="I">_</div>
+      <div class="slot" data-letter="N">_</div>
+      <div class="slot" data-letter="I">_</div>
+      <div class="slot" data-letter="T">_</div>
+      <div class="slot" data-letter="Y">_</div>
+      <div class="exclaim">!</div>
+      <div class="exclaim">!</div>
+    </div>
 
-  <div id="register">Register Now</div>
+    <div id="register">Register Now</div>
+  </div>
 </div>
 
 <!-- POSTER -->
@@ -117,22 +127,27 @@ const register = document.getElementById('register');
 const intro = document.getElementById('intro');
 const poster = document.getElementById('poster');
 
-const LETTER_SPEED = 140;
+/* SLOWER LETTER APPEARANCE */
+const LETTER_SPEED = 350; // ms (calm & deliberate)
 
+// Replace blanks with letters
 slots.forEach((slot, i) => {
   setTimeout(() => {
     slot.textContent = slot.dataset.letter;
   }, i * LETTER_SPEED);
 });
 
+// Show !!
 setTimeout(() => {
   exclaims.forEach(e => e.style.opacity = 1);
 }, slots.length * LETTER_SPEED);
 
+// Show Register Now
 setTimeout(() => {
   register.style.opacity = 1;
-}, slots.length * LETTER_SPEED + 200);
+}, slots.length * LETTER_SPEED + 300);
 
+// Fade to poster after 1s
 setTimeout(() => {
   intro.classList.remove('show');
   poster.classList.add('show');
