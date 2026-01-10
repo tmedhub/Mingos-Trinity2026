@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>TRINITY 2026</title>
 
-<!-- Font -->
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -29,7 +28,7 @@ body {
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 1.2s ease;
+  transition: opacity 1s ease;
 }
 
 .show {
@@ -39,13 +38,15 @@ body {
 /* ---------- INTRO ---------- */
 #intro {
   flex-direction: column;
-  gap: 2.2rem;
-  background: url('bg.jpeg') center/cover no-repeat;
+  gap: 2.5rem;
+  background: url('bg.jpg') center / contain no-repeat;
 }
 
+/* ---------- WORD ---------- */
 .word {
   display: flex;
   gap: 1.6rem; /* equal spacing */
+  align-items: center;
 }
 
 .slot {
@@ -56,16 +57,25 @@ body {
   letter-spacing: -0.04em;
   color: #000;
   opacity: 1;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.15s ease;
+}
+
+.exclaim {
+  font-size: clamp(3.8rem, 10vw, 5.8rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  opacity: 0;
+  transition: opacity 0.15s ease;
 }
 
 /* ---------- REGISTER ---------- */
 #register {
-  font-size: 1rem;
-  letter-spacing: 0.18em;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
 }
 
 /* ---------- POSTER ---------- */
@@ -78,7 +88,7 @@ body {
   height: 100%;
   object-fit: contain;
   opacity: 0;
-  transition: opacity 1.2s ease;
+  transition: opacity 1s ease;
 }
 
 #poster.show img {
@@ -99,11 +109,11 @@ body {
     <div class="slot" data-letter="I">_</div>
     <div class="slot" data-letter="T">_</div>
     <div class="slot" data-letter="Y">_</div>
-    <div class="slot" data-letter="!">_</div>
-    <div class="slot" data-letter="!">_</div>
+    <div class="exclaim">!</div>
+    <div class="exclaim">!</div>
   </div>
 
-  <div id="register">Register Now!!</div>
+  <div id="register">Register Now</div>
 </div>
 
 <!-- POSTER -->
@@ -113,36 +123,40 @@ body {
 
 <script>
 const slots = document.querySelectorAll('.slot');
+const exclaims = document.querySelectorAll('.exclaim');
 const register = document.getElementById('register');
 const intro = document.getElementById('intro');
 const poster = document.getElementById('poster');
 
-const LETTER_DURATION = 1300; // faster than before
-const POST_WORD_PAUSE = 1000; // 1 second
+const LETTER_INTERVAL = 200; // fast
+const POST_WORD_PAUSE = 1000;
 
-// Reveal letters
+// Replace blanks with letters
 slots.forEach((slot, index) => {
   setTimeout(() => {
     slot.style.opacity = 0;
-
     setTimeout(() => {
       slot.textContent = slot.dataset.letter;
       slot.style.opacity = 1;
-    }, 300);
-
-  }, index * LETTER_DURATION);
+    }, 80);
+  }, index * LETTER_INTERVAL);
 });
 
-// Show Register Now after word completes
+// Show exclamations after last letter
+setTimeout(() => {
+  exclaims.forEach(e => e.style.opacity = 1);
+}, slots.length * LETTER_INTERVAL);
+
+// Show Register Now
 setTimeout(() => {
   register.style.opacity = 1;
-}, slots.length * LETTER_DURATION);
+}, slots.length * LETTER_INTERVAL + 150);
 
 // Fade to poster after 1s
 setTimeout(() => {
   intro.classList.remove('show');
   poster.classList.add('show');
-}, slots.length * LETTER_DURATION + POST_WORD_PAUSE);
+}, slots.length * LETTER_INTERVAL + POST_WORD_PAUSE);
 </script>
 
 </body>
