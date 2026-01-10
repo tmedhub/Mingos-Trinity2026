@@ -6,7 +6,7 @@
 <title>TRINITY 2026</title>
 
 <!-- Font -->
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -17,9 +17,8 @@
 
 body {
   height: 100vh;
-  background: #fff;
-  font-family: 'Space Grotesk', system-ui, sans-serif;
   overflow: hidden;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
 }
 
 /* ---------- SCREENS ---------- */
@@ -29,8 +28,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 1s ease;
   opacity: 0;
+  transition: opacity 1.2s ease;
 }
 
 .show {
@@ -40,29 +39,33 @@ body {
 /* ---------- INTRO ---------- */
 #intro {
   flex-direction: column;
+  gap: 2.2rem;
+  background: url('bg.jpeg') center/cover no-repeat;
 }
 
 .word {
   display: flex;
-  gap: 1.2rem;
+  gap: 1.6rem; /* equal spacing */
 }
 
 .slot {
-  width: 2.2rem;
+  width: 3rem;
   text-align: center;
-  font-size: clamp(3rem, 10vw, 5rem);
+  font-size: clamp(3.8rem, 10vw, 5.8rem);
   font-weight: 700;
   letter-spacing: -0.04em;
   color: #000;
-  transition: opacity 0.4s ease;
-}
-
-.blank {
   opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
-.letter {
+/* ---------- REGISTER ---------- */
+#register {
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 /* ---------- POSTER ---------- */
@@ -74,19 +77,19 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transform: scale(1.02);
-  transition: transform 1.2s ease;
+  opacity: 0;
+  transition: opacity 1.2s ease;
 }
 
 #poster.show img {
-  transform: scale(1);
+  opacity: 1;
 }
 </style>
 </head>
 
 <body>
 
-<!-- INTRO SCREEN -->
+<!-- INTRO -->
 <div id="intro" class="screen show">
   <div class="word">
     <div class="slot" data-letter="T">_</div>
@@ -96,36 +99,50 @@ body {
     <div class="slot" data-letter="I">_</div>
     <div class="slot" data-letter="T">_</div>
     <div class="slot" data-letter="Y">_</div>
+    <div class="slot" data-letter="!">_</div>
+    <div class="slot" data-letter="!">_</div>
   </div>
+
+  <div id="register">Register Now!!</div>
 </div>
 
-<!-- POSTER SCREEN -->
+<!-- POSTER -->
 <div id="poster" class="screen">
-  <img src="trinity2026.jpeg" alt="Trinity 2026 Poster">
+  <img src="Trinity2026.jpeg" alt="Trinity 2026 Poster">
 </div>
 
 <script>
 const slots = document.querySelectorAll('.slot');
+const register = document.getElementById('register');
 const intro = document.getElementById('intro');
 const poster = document.getElementById('poster');
 
+const LETTER_DURATION = 1300; // faster than before
+const POST_WORD_PAUSE = 1000; // 1 second
+
+// Reveal letters
 slots.forEach((slot, index) => {
   setTimeout(() => {
     slot.style.opacity = 0;
+
     setTimeout(() => {
       slot.textContent = slot.dataset.letter;
       slot.style.opacity = 1;
     }, 300);
-  }, index * 800);
+
+  }, index * LETTER_DURATION);
 });
 
-// After last letter + 2s pause → fade poster
-const totalTime = slots.length * 800 + 2000;
+// Show Register Now after word completes
+setTimeout(() => {
+  register.style.opacity = 1;
+}, slots.length * LETTER_DURATION);
 
+// Fade to poster after 1s
 setTimeout(() => {
   intro.classList.remove('show');
   poster.classList.add('show');
-}, totalTime);
+}, slots.length * LETTER_DURATION + POST_WORD_PAUSE);
 </script>
 
 </body>
