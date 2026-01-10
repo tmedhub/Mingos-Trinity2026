@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TRINITY 2026</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -37,14 +37,14 @@ html, body {
 
 /* ---------- INTRO ---------- */
 #intro {
-  background: url('bg.jpeg') center / contain no-repeat;
+  background: url('bg.jpeg') center / cover no-repeat; /* FULL SCREEN */
 }
 
 .center-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1.6rem;
 }
 
 /* ---------- WORD ---------- */
@@ -55,23 +55,18 @@ html, body {
   align-items: center;
 }
 
-.slot,
-.exclaim {
-  width: 2rem;
-  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
-  font-weight: 700;
+.slot {
+  width: 2.2rem;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 800; /* EXTRA BOLD */
   color: #000;
-}
-
-.exclaim {
-  opacity: 0;
 }
 
 /* ---------- REGISTER ---------- */
 #register {
-  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  font-weight: 800;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   opacity: 0;
 }
@@ -102,8 +97,6 @@ html, body {
       <div class="slot" data-letter="I">_</div>
       <div class="slot" data-letter="T">_</div>
       <div class="slot" data-letter="Y">_</div>
-      <div class="exclaim" id="ex1">!</div>
-      <div class="exclaim" id="ex2">!</div>
     </div>
 
     <div id="register">Register Now!!</div>
@@ -117,45 +110,9 @@ html, body {
 
 <script>
 const slots = document.querySelectorAll('.slot');
-const ex1 = document.getElementById('ex1');
-const ex2 = document.getElementById('ex2');
 const register = document.getElementById('register');
 const intro = document.getElementById('intro');
 const poster = document.getElementById('poster');
 
-/* ---------- TIMING ---------- */
-const LETTER_SPEED = 1000;   // 1s per letter
-const EXCLAMATION_GAP = 600; // gap between !
-const POSTER_WAIT = 2000;    // wait after Register Now!!
-
-// Letters appear
-slots.forEach((slot, i) => {
-  setTimeout(() => {
-    slot.textContent = slot.dataset.letter;
-  }, i * LETTER_SPEED);
-});
-
-// First !
-setTimeout(() => {
-  ex1.style.opacity = 1;
-}, slots.length * LETTER_SPEED);
-
-// Second !
-setTimeout(() => {
-  ex2.style.opacity = 1;
-}, slots.length * LETTER_SPEED + EXCLAMATION_GAP);
-
-// Register Now!!
-setTimeout(() => {
-  register.style.opacity = 1;
-}, slots.length * LETTER_SPEED + EXCLAMATION_GAP + 200);
-
-// Poster after 2s pause
-setTimeout(() => {
-  intro.classList.remove('show');
-  poster.classList.add('show');
-}, slots.length * LETTER_SPEED + EXCLAMATION_GAP + 200 + POSTER_WAIT);
-</script>
-
-</body>
-</html>
+const LETTER_SPEED = 1000; // 1s per letter
+const POSTER_WAIT = 2000;_
