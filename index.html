@@ -19,6 +19,7 @@ html, body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
 }
 
+/* ---------- SCREENS ---------- */
 .screen {
   position: absolute;
   inset: 0;
@@ -34,6 +35,7 @@ html, body {
   opacity: 1;
 }
 
+/* ---------- INTRO ---------- */
 #intro {
   background: url('bg.jpeg') center / contain no-repeat;
 }
@@ -45,6 +47,7 @@ html, body {
   gap: 1.4rem;
 }
 
+/* ---------- WORD ---------- */
 .word {
   display: flex;
   gap: 1rem;
@@ -64,14 +67,16 @@ html, body {
   opacity: 0;
 }
 
+/* ---------- REGISTER ---------- */
 #register {
-  font-size: clamp(0.8rem, 2.3vw, 1rem);
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0;
 }
 
+/* ---------- POSTER ---------- */
 #poster {
   background: #000;
 }
@@ -86,6 +91,7 @@ html, body {
 
 <body>
 
+<!-- INTRO -->
 <div id="intro" class="screen show">
   <div class="center-content">
     <div class="word">
@@ -100,10 +106,11 @@ html, body {
       <div class="exclaim" id="ex2">!</div>
     </div>
 
-    <div id="register">Register Now</div>
+    <div id="register">Register Now!!</div>
   </div>
 </div>
 
+<!-- POSTER -->
 <div id="poster" class="screen">
   <img src="Trinity2026.jpg" alt="Trinity 2026 Poster">
 </div>
@@ -116,11 +123,12 @@ const register = document.getElementById('register');
 const intro = document.getElementById('intro');
 const poster = document.getElementById('poster');
 
-const LETTER_SPEED = 1000; // 1s per letter
-const EXCLAMATION_DELAY = 500;
-const POSTER_DELAY = 2000;
+/* ---------- TIMING ---------- */
+const LETTER_SPEED = 1000;   // 1s per letter
+const EXCLAMATION_GAP = 600; // gap between !
+const POSTER_WAIT = 2000;    // wait after Register Now!!
 
-// Letters
+// Letters appear
 slots.forEach((slot, i) => {
   setTimeout(() => {
     slot.textContent = slot.dataset.letter;
@@ -135,18 +143,18 @@ setTimeout(() => {
 // Second !
 setTimeout(() => {
   ex2.style.opacity = 1;
-}, slots.length * LETTER_SPEED + EXCLAMATION_DELAY);
+}, slots.length * LETTER_SPEED + EXCLAMATION_GAP);
 
-// Register Now
+// Register Now!!
 setTimeout(() => {
   register.style.opacity = 1;
-}, slots.length * LETTER_SPEED + EXCLAMATION_DELAY + 200);
+}, slots.length * LETTER_SPEED + EXCLAMATION_GAP + 200);
 
 // Poster after 2s pause
 setTimeout(() => {
   intro.classList.remove('show');
   poster.classList.add('show');
-}, slots.length * LETTER_SPEED + EXCLAMATION_DELAY + 200 + POSTER_DELAY);
+}, slots.length * LETTER_SPEED + EXCLAMATION_GAP + 200 + POSTER_WAIT);
 </script>
 
 </body>
