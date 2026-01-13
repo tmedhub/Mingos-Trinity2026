@@ -72,7 +72,7 @@ html, body {
   transition: opacity 1s ease;
 }
 
-/* ---------- POSTER (SCROLLABLE) ---------- */
+/* ---------- POSTER (IMAGE SCROLL) ---------- */
 #poster {
   background: #000;
   display: block;
@@ -81,7 +81,7 @@ html, body {
 .poster-scroll {
   height: 100vh;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* smooth iOS scroll */
+  -webkit-overflow-scrolling: touch; /* iOS smooth scroll */
 }
 
 .poster-scroll img {
@@ -138,16 +138,19 @@ const poster = document.getElementById('poster');
 const LETTER_SPEED = 300;
 const POSTER_WAIT = 1500;
 
+// Letter animation
 slots.forEach((slot, i) => {
   setTimeout(() => {
     slot.textContent = slot.dataset.letter;
   }, i * LETTER_SPEED);
 });
 
+// Show register
 setTimeout(() => {
   register.style.opacity = 1;
 }, slots.length * LETTER_SPEED + 200);
 
+// Switch to poster
 setTimeout(() => {
   intro.classList.remove('show');
   poster.classList.add('show');
