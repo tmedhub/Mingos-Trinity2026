@@ -72,16 +72,16 @@ html, body {
   transition: opacity 1s ease;
 }
 
-/* ---------- POSTER (FIXED) ---------- */
+/* ---------- POSTER (ONLY REQUIRED CHANGE) ---------- */
 #poster {
   background: #000;
-  overflow-y: auto;      /* ENABLE SCROLL */
-  align-items: flex-start; /* 🔥 OVERRIDE CENTERING */
+  display: block;          /* 🔥 REMOVE FLEX */
+  overflow: hidden;        /* page stays fixed */
 }
 
 #poster iframe {
   width: 100%;
-  height: 200vh; /* FORCE HEIGHT > SCREEN */
+  height: 100vh;           /* viewport height */
   border: none;
 }
 </style>
@@ -89,6 +89,7 @@ html, body {
 
 <body>
 
+<!-- INTRO -->
 <div id="intro" class="screen show">
   <div class="center-content">
     <div class="word">
@@ -104,6 +105,7 @@ html, body {
   </div>
 </div>
 
+<!-- POSTER -->
 <div id="poster" class="screen">
   <iframe src="Trinity Brochure.pdf"></iframe>
 </div>
