@@ -60,11 +60,11 @@ html, body {
 /* Letters: Bold, black, highly visible */
 .slot {
   width: auto;
-  font-size: clamp(3rem, 8vw, 6rem); /* responsive large letters */
-  font-weight: 400; /* Archivo Black is already very bold */
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 400;
   font-family: 'Archivo Black', sans-serif;
-  color: #000; /* black letters */
-  text-shadow: 0 0 4px rgba(255,255,255,0.6); /* subtle glow for visibility */
+  color: #000;
+  text-shadow: 0 0 4px rgba(255,255,255,0.6);
 }
 
 /* ---------- REGISTER ---------- */
@@ -80,12 +80,13 @@ html, body {
 /* ---------- POSTER ---------- */
 #poster {
   background: #000;
+  overflow: auto; /* REQUIRED for PDF scrolling */
 }
 
-#poster img {
+#poster iframe {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  border: none;
 }
 </style>
 </head>
@@ -111,7 +112,10 @@ html, body {
 
 <!-- POSTER -->
 <div id="poster" class="screen">
-  <img src="Trinity Brochure.pdf" alt="Trinity 2026 Poster">
+  <iframe 
+    src="Trinity Brochure.pdf"
+    title="Trinity 2026 Poster">
+  </iframe>
 </div>
 
 <script>
@@ -144,4 +148,3 @@ setTimeout(() => {
 
 </body>
 </html>
-
